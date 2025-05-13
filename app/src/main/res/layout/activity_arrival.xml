@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Arrival">
+
+    <!-- כותרת ראשית -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="פרטי הגעה"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- איך נמצא המטופל -->
+    <TextView
+        android:id="@+id/patient_condition_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="כיצד נמצא המטופל"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/patient_condition_input"
+        android:layout_width="379dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="שכוב\ ישוב\ מתהלך וכדומה"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patient_condition_label" />
+
+    <!-- איפה נמצא המטופל -->
+    <TextView
+        android:id="@+id/patient_location_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="איפה נמצא המטופל"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/patient_condition_input"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/patient_location_input"
+        android:layout_width="381dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="ביתו, רחוב, מרכז קניות וכדומה"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/patient_location_label" />
+
+    <!-- מצב הכרה -->
+    <TextView
+        android:id="@+id/consciousness_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="מצב הכרה"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/patient_location_input"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/consciousness_input"
+        android:layout_width="382dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="תיאור מצב"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/consciousness_label" />
+
+    <!-- מי סיפר -->
+    <TextView
+        android:id="@+id/informant_name_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="מי תיאר את המקרה"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/consciousness_input"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/informant_name_input"
+        android:layout_width="377dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="בת המטופל, עובר אורח וכדומה"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informant_name_label" />
+
+    <!-- מה סיפר -->
+    <TextView
+        android:id="@+id/informant_details_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="מהו סיפור המקרה?"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/informant_name_input"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:id="@+id/informant_details_input"
+        android:layout_width="379dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="תיאור סיפור"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/informant_details_label" />
+
+    <!-- כפתור הקלטה -->
+    <ImageButton
+        android:id="@+id/btn_record_case"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_btn_speak_now"
+        android:contentDescription="הקלט סיפור מקרה"
+        app:layout_constraintTop_toBottomOf="@id/informant_details_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@android:color/black" />
+
+    <!-- כפתור שמירת הנתונים -->
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="231dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/black"
+        android:text="הבא"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_record_case" />
+</androidx.constraintlayout.widget.ConstraintLayout>

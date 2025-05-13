@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95645435596",
+    "project_id": "mada-4aa3c",
+    "storage_bucket": "mada-4aa3c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95645435596:android:80fcb3d3422e682e03a469",
+        "android_client_info": {
+          "package_name": "com.example.mda"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHCICO-PfYI4wHPPnliJoDH1QxOimfDRA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

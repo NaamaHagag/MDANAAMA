@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.MedicalBackground">
+
+    <!-- כותרת ראשית -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="רקע רפואי"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+
+    <!-- תווית מחלות רקע -->
+
+    <!-- EditText מחלות רקע -->
+    <TextView
+        android:id="@+id/tv_diseases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="64dp"
+        android:text="מחלות רקע:"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <EditText
+        android:id="@+id/et_diseases"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="הכנס מחלות רקע"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_diseases"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- תווית אלרגיות -->
+    <TextView
+        android:id="@+id/tv_allergies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="אלרגיות:"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/et_diseases"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+    <!-- EditText אלרגיות -->
+    <EditText
+        android:id="@+id/et_allergies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="הכנס אלרגיות"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_allergies"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- תווית טיפול תרופתי -->
+    <TextView
+        android:id="@+id/tv_medications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="טיפול תרופתי קבוע:"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/et_allergies"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp" />
+
+    <!-- EditText טיפול תרופתי -->
+
+    <!-- כפתור שמירה -->
+
+    <EditText
+        android:id="@+id/et_medications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="הכנס טיפול תרופתי קבוע"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_medications" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="242dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="70dp"
+        android:backgroundTint="@color/black"
+        android:text="הבא"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_medications"
+        app:layout_constraintVertical_bias="0.23" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

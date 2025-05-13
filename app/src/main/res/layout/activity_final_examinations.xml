@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.FinalExaminations">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="בדיקות צוות לפי פרוטוקול"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- סימני מצוקה נשימתית -->
+
+    <TextView
+        android:id="@+id/respiratory_distress_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="האם יש סימני מצוקה נשימתית?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <EditText
+        android:id="@+id/respiratory_distress_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:hint="קיימים"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/respiratory_distress_label" />
+
+    <Switch
+        android:id="@+id/respiratory_distress_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/respiratory_distress_yes"
+        app:layout_constraintTop_toBottomOf="@id/respiratory_distress_label" />
+
+    <!-- חיוורון והזעה -->
+
+    <EditText
+        android:id="@+id/respiratory_distress_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:hint="לא קיימים"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/respiratory_distress_switch"
+        app:layout_constraintTop_toBottomOf="@id/respiratory_distress_label" />
+
+    <!-- בחילות והקאות -->
+
+    <TextView
+        android:id="@+id/paleness_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="האם יש חיוורון או הזעה?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/respiratory_distress_yes" />
+
+    <EditText
+        android:id="@+id/paleness_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:hint="כן"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paleness_label" />
+
+    <Switch
+        android:id="@+id/paleness_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/paleness_yes"
+        app:layout_constraintTop_toBottomOf="@id/paleness_label" />
+
+    <EditText
+        android:id="@+id/paleness_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="לא"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/paleness_switch"
+        app:layout_constraintTop_toBottomOf="@id/paleness_label" />
+
+    <TextView
+        android:id="@+id/nausea_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="האם יש בחילות או הקאות?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paleness_yes" />
+
+    <EditText
+        android:id="@+id/nausea_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:hint="כן"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nausea_label" />
+
+    <Switch
+        android:id="@+id/nausea_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/nausea_yes"
+        app:layout_constraintTop_toBottomOf="@id/nausea_label" />
+
+    <!-- מתמצא בזמן ובמרחב -->
+
+    <EditText
+        android:id="@+id/nausea_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="לא"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/nausea_switch"
+        app:layout_constraintTop_toBottomOf="@id/nausea_label" />
+
+    <TextView
+        android:id="@+id/orientation_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="האם המטופל\\ת מתמצא\\ת בזמן ובמרחב?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nausea_yes" />
+
+    <!-- האישונים שווים ומגיבים לאור -->
+
+    <EditText
+        android:id="@+id/orientation_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:hint="כן"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orientation_label" />
+
+    <Switch
+        android:id="@+id/orientation_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toEndOf="@id/orientation_yes"
+        app:layout_constraintTop_toBottomOf="@id/orientation_label" />
+
+    <EditText
+        android:id="@+id/orientation_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:hint="לא"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/orientation_switch"
+        app:layout_constraintTop_toBottomOf="@id/orientation_label" />
+
+    <TextView
+        android:id="@+id/pupils_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="האם האישונים שווים ומגיבים לאור?"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orientation_yes" />
+
+
+    <!-- כפתור NEXT -->
+    <EditText
+        android:id="@+id/pupils_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:hint="כן"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pupils_label" />
+
+    <Switch
+        android:id="@+id/pupils_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@id/pupils_yes"
+        app:layout_constraintTop_toBottomOf="@id/pupils_label" />
+
+    <EditText
+        android:id="@+id/pupils_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:hint="לא"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/pupils_switch"
+        app:layout_constraintTop_toBottomOf="@id/pupils_label" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="244dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/black"
+        android:text="הבא"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pupils_yes"
+        app:layout_constraintVertical_bias="0.059" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

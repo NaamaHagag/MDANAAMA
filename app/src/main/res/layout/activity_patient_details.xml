@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Patient_details">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="center"
+        android:text="פרטי מטופל"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_full_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:text="שם מלא:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <EditText
+        android:id="@+id/et_full_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="הכנס שם מלא"
+        android:inputType="textPersonName"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/tv_full_name_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- תעודת זהות -->
+
+    <TextView
+        android:id="@+id/tv_id_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:text="תעודת זהות:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_full_name" />
+
+    <!-- מספר טלפון -->
+
+    <EditText
+        android:id="@+id/et_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="הכנס תעודת זהות"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_id_label" />
+
+    <TextView
+        android:id="@+id/tv_phone_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="0dp"
+        android:text="מספר טלפון:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_id" />
+
+    <EditText
+        android:id="@+id/et_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="הכנס מספר טלפון"
+        android:inputType="phone"
+        android:background="@android:drawable/edit_text"
+        app:layout_constraintTop_toBottomOf="@id/tv_phone_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- מין -->
+
+    <TextView
+        android:id="@+id/tv_male"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="זכר"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_phone"
+        android:layout_marginTop="40dp" />
+
+    <Switch
+        android:id="@+id/switch_gender"
+        android:layout_width="68dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/tv_female"
+        app:layout_constraintStart_toEndOf="@id/tv_male"
+        app:layout_constraintTop_toBottomOf="@id/et_phone" />
+
+    <!-- גיל -->
+
+    <TextView
+        android:id="@+id/tv_female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="164dp"
+        android:text="נקבה"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_phone" />
+
+    <TextView
+        android:id="@+id/tv_age_label"
+        android:layout_width="60dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="20dp"
+        android:text="גיל:"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/et_age"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switch_gender"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="207dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="180dp"
+        android:backgroundTint="@color/black"
+        android:text="הבא"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_age"
+        app:layout_constraintVertical_bias="0.054"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/et_age"
+        android:layout_width="355dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:ems="10"
+        android:hint="הכנס גיל מטופל בכתב או מספר"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch_gender" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

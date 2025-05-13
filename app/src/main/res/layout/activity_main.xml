@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivity"
+    tools:ignore="ExtraText">
+
+
+    <!-- שם משתמש -->
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:paddingBottom="24dp"
+        android:text="ברוכים הבאים למערכת הטפסים של מגן דוד אדום"
+        android:textColor="#FF0000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/username_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="8dp"
+        android:text="username"
+        android:textColor="#000000"
+        android:textDirection="rtl"
+        android:textSize="16sp" />
+
+    <!-- סיסמה -->
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="288dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="Enter Email"
+        android:inputType="textPersonName"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/password_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="8dp"
+        android:text="password"
+        android:textColor="#000000"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="287dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="24dp"
+        android:background="@android:drawable/edit_text"
+        android:hint="Enter ID"
+        android:inputType="numberPassword"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:text="LogIn"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+
+</LinearLayout>
