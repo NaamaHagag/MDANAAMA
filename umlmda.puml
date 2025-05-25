@@ -1,0 +1,281 @@
+@startuml
+class com.example.mda.Obj.Examinations {
+- String respiratoryDistress
+- String palenessSweating
+- String nauseaVomiting
+- String orientation
+- String pupilsReaction
++ String getRespiratoryDistress()
++ void setRespiratoryDistress(String)
++ String getPalenessSweating()
++ void setPalenessSweating(String)
++ String getNauseaVomiting()
++ void setNauseaVomiting(String)
++ String getOrientation()
++ void setOrientation(String)
++ String getPupilsReaction()
++ void setPupilsReaction(String)
+}
+
+
+class com.example.mda.Activities.Arrival {
+~ EditText patient_condition_input
+~ Button save_button
+~ ImageButton btn_record_case
+~ Context context
+- {static} int SPEECH_REQUEST_CODE
+# void onCreate(Bundle)
+- void startSpeechToText()
+# void onActivityResult(int,int,Intent)
+- void savedetails(String,String,String,String,String)
+}
+
+
+class com.example.mda.Obj.Anamnesis {
+- ArrivalClass arrival
+- Background background
+- Tests final_examinations
+- Hospitald hospital
+- Patient details
+- Tests medical_tests
+- String KeyID
++ Background getBackground()
++ void setBackground(Background)
++ ArrivalClass getArrival()
++ void setArrival(ArrivalClass)
++ Tests getFinal_examinations()
++ void setFinal_examinations(Tests)
++ Hospitald getHospital()
++ void setHospital(Hospitald)
++ Patient getDetails()
++ void setDetails(Patient)
++ Tests getMedical_tests()
++ void setMedical_tests(Tests)
++ String getKeyID()
++ void setKeyID(String)
+}
+
+
+class com.example.mda.Activities.FinalExaminations {
+~ Switch respiratory_distress_switch
+~ Button next_button
+~ Context context
+# void onCreate(Bundle)
+- void savedetails(String,String,String,String,String)
+}
+
+
+class com.example.mda.Activities.MainActivity {
+~ TextView username_label
+~ EditText et_username
+~ Button login
+~ FirebaseAuth mAuth
+~ AlertDialog.Builder adb
+~ Intent intent
+~ Context context
+~ String manager
+# void onCreate(Bundle)
+}
+
+
+class com.example.mda.Activities.SignUp {
+- EditText etId
+- Button btn_register
+- FirebaseAuth mAuth
+- DatabaseReference dbRef
+# void onCreate(Bundle)
++ void registerUser()
+}
+
+
+class com.example.mda.Activities.ShowDetails {
+- TextView dataTextView
+- DatabaseReference databaseReference
+- String uid
+# void onCreate(Bundle)
+- void fetchPatientData()
+}
+
+
+class com.example.mda.Obj.Background {
+~ String diseases
++ String getMedications()
++ void setMedications(String)
++ String getAllergies()
++ void setAllergies(String)
++ String getDiseases()
++ void setDiseases(String)
+}
+
+
+class com.example.mda.Activities.MedicalTests {
+~ EditText etPupilEquality
+~ Button btn_next1
+- DatabaseReference databaseReference
+~ Context context
+# void onCreate(Bundle)
+- void savedetails(String,String,String,String,String)
+}
+
+
+class com.example.mda.Activities.Hospital {
+~ EditText hospital_name_input
+~ Button save_button
+- DatabaseReference databaseReference
+~ Context context
+# void onCreate(Bundle)
+- void savedetails(String,String,String,boolean)
+}
+
+
+class com.example.mda.FBRef {
++ {static} FirebaseDatabase FBDB
++ {static} DatabaseReference refPatients
++ {static} DatabaseReference refClosed
++ {static} FirebaseFirestore FBFS
++ {static} CollectionReference refImageStamp
+}
+
+class com.example.mda.Activities.Report {
+~ TextView title1
+~ ImageView imageViewReport
+# void onCreate(Bundle)
+- void showAnamnesis(Anamnesis)
+}
+
+
+class com.example.mda.Activities.MedicalBackground {
+~ EditText et_diseases
+~ Button btn_next
+- DatabaseReference databaseReference
+~ Context context
+# void onCreate(Bundle)
+- void savedetails(String,String,String)
+}
+
+
+class com.example.mda.Obj.ArrivalClass {
+- String condition
+- String location
+- String consciousness
+- String informantName
+- String informantDetails
++ String getCondition()
++ void setCondition(String)
++ String getLocation()
++ void setLocation(String)
++ String getConsciousness()
++ void setConsciousness(String)
++ String getInformantName()
++ void setInformantName(String)
++ String getInformantDetails()
++ void setInformantDetails(String)
+}
+
+
+class com.example.mda.Activities.Camera {
+~ ImageView imageView
+~ Button btn_takepic
+- {static} int REQUEST_CAMERA_PERMISSION
+- {static} int REQUEST_READ_EXTERNAL_STORAGE_PERMISSION
+- {static} int REQUEST_PICK_IMAGE
+~ ActivityResultLauncher<Intent> activityResultLauncher
+# void onCreate(Bundle)
+# void onResume()
++ void onRequestPermissionsResult(int,String[],int[])
++ void gallery(View)
+# void onActivityResult(int,int,Intent)
++ void addImage(Bitmap,String)
++ void next11(View)
+}
+
+
+class com.example.mda.Activities.Patient_details {
+~ Context context
+~ EditText et_full_name
+~ Switch switch_gender
+~ Button next
+- DatabaseReference databaseReference
+~ ArrayList<String> ageList
+~ ArrayAdapter<String> adapter
++ {static} Anamnesis anamnesis
+# void onCreate(Bundle)
++ void onBackPressed()
+- void savedetails(String,String,String,String,String)
+}
+
+
+class com.example.mda.Obj.Tests {
+~ String pulse
++ String getPulse()
++ void setPulse(String)
++ String getBloodPressure()
++ void setBloodPressure(String)
++ String getOxygenSaturation()
++ void setOxygenSaturation(String)
++ String getRespirations()
++ void setRespirations(String)
++ String getPupilEquality()
++ void setPupilEquality(String)
+}
+
+
+class com.example.mda.Obj.Hospitald {
+- String name
+- String department
+- String staff
++ String getName()
++ void setName(String)
++ String getDepartment()
++ void setDepartment(String)
++ String getStaff()
++ void setStaff(String)
+}
+
+
+class com.example.mda.Obj.Patient {
+~ String fullName
++ String getFullName()
++ void setFullName(String)
++ String getId()
++ void setId(String)
++ String getPhoneNumber()
++ void setPhoneNumber(String)
++ String getGender()
++ void setGender(String)
++ String getAge()
++ void setAge(String)
+}
+
+
+class com.example.mda.Activities.Manager {
+~ EditText id_input
+~ Spinner spinner
+~ Button search_button
+~ ArrayList<String> events
+~ ArrayList<Anamnesis> anamnesis
+~ ArrayAdapter<String> adp
+# void onCreate(Bundle)
+- void checkIfPatientExists()
++ {static} String db2Dsiplay(String)
++ void onItemSelected(AdapterView<?>,View,int,long)
++ void onNothingSelected(AdapterView<?>)
+}
+
+
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.Arrival
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.FinalExaminations
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.SignUp
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.ShowDetails
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.MedicalTests
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.Hospital
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.Report
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.MedicalBackground
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.Camera
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.Patient_details
+com.example.mda.Activities.OnItemSelectedListener <|.. com.example.mda.Activities.Manager
+androidx.appcompat.app.AppCompatActivity <|-- com.example.mda.Activities.Manager
+@enduml

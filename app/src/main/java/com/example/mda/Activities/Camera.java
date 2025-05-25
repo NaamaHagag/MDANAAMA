@@ -46,6 +46,18 @@ public class Camera extends AppCompatActivity {
     private static final int REQUEST_PICK_IMAGE = 301;
 
 
+    ActivityResultLauncher<Intent> activityResultLauncher= registerForActivityResult
+            (new ActivityResultContracts.StartActivityForResult(), result -> {
+                        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                            Bundle bundle = result.getData().getExtras();
+                            Bitmap bitmap = (Bitmap) bundle.get("data");
+                            imageView.setImageBitmap(bitmap);
+                            addImage(bitmap, anamnesis.getDetails().getId()+anamnesis.getKeyID());
+                        }
+                    }
+            );
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,67 +75,66 @@ public class Camera extends AppCompatActivity {
         gallery=findViewById(R.id.gallery);
 
         btn_takepic.setOnClickListener(v -> {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra("source","camera");
-            activityResultLauncher.launch(intent);
+            Intent takePicIntent = new Intent();
+            takePicIntent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
+            activityResultLauncher.launch(takePicIntent);
         });
     }
 
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-//        }
-//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_EXTERNAL_STORAGE_PERMISSION);
-//        }
-//    }
-//
-//    /**
-//     * onRequestPermissionsResult method
-//     * <p> Method triggered by other activities returning result of permissions request
-//     * </p>
-//     *
-//     * @param requestCode the request code triggered the activity
-//     * @param permissions the array of permissions granted
-//     * @param grantResults the array of permissions granted
-//     */
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == REQUEST_CAMERA_PERMISSION) {
-//            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-//                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//        if (requestCode == REQUEST_READ_EXTERNAL_STORAGE_PERMISSION) {
-//            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-//                Toast.makeText(this, "Gallery permission denied", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+        }
+    }
 
-    ActivityResultLauncher<Intent> activityResultLauncher= registerForActivityResult
-            (new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    String source=result.getData().getStringExtra("source");
-                    Toast.makeText(this, source, Toast.LENGTH_LONG).show();
-                    Log.i("Camera","the source is: "+source);
-                    Bundle bundle = result.getData().getExtras();
-                    Bitmap bitmap = (Bitmap) bundle.get("data");
-                    imageView.setImageBitmap(bitmap);
-                    addImage(bitmap, anamnesis.getDetails().getId()+anamnesis.getKeyID());
-                }
+    /**
+     * onRequestPermissionsResult method
+     * <p> Method triggered by other activities returning result of permissions request
+     * </p>
+     *
+     * @param requestCode the request code triggered the activity
+     * @param permissions the array of permissions granted
+     * @param grantResults the array of permissions granted
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show();
             }
-    );
+        }
+        if (requestCode == REQUEST_READ_EXTERNAL_STORAGE_PERMISSION) {
+            if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                Toast.makeText(this, "Gallery permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     public void gallery(View view) {
         Intent si = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(si, REQUEST_PICK_IMAGE);
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                imageView.setImageBitmap(bitmap);
+                addImage(bitmap, anamnesis.getDetails().getId() + anamnesis.getKeyID());
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "שגיאה בטעינת התמונה מהגלריה", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     public void addImage(Bitmap image, String name) {
         ProgressDialog pd;
@@ -141,13 +152,6 @@ public class Camera extends AppCompatActivity {
                 image.compress(Bitmap.CompressFormat.JPEG, qual, baos);
                 imageBytes = baos.toByteArray();
             }
-            // Resize
-//        while (imageBytes.length > 1048576) {
-//            imageBitmap = Bitmap.createScaledBitmap(imageBitmap, (int) (imageBitmap.getWidth() * 0.9), (int) (imageBitmap.getHeight() * 0.9), true);
-//            baos = new ByteArrayOutputStream();
-//            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//            imageBytes = baos.toByteArray();
-//        }
             pd.dismiss();
         }
 
@@ -172,9 +176,8 @@ public class Camera extends AppCompatActivity {
                 });
         pd.dismiss();
     }
-    public void nextbtn(View view){
+    public void next11(View view){
         Intent intent=new Intent(this, Report.class);
         startActivity(intent);
-
     }
 }
