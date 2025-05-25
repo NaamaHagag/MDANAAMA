@@ -38,26 +38,81 @@ import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Camera Activity for capturing and managing patient medical images.
+ *
+ * <p>This activity provides functionality to:</p>
+ * <ul>
+ *   <li>Capture photos using device camera</li>
+ *   <li>Select images from device gallery</li>
+ *   <li>Compress and upload images to Firebase Firestore</li>
+ *   <li>Display captured/selected images in preview</li>
+ * </ul>
+ *
+ * <p>The activity handles necessary permissions for camera and storage access,
+ * and integrates with Firebase for cloud storage of medical documentation.</p>
+ *
+ * @author Medical Documentation App Team
+ * @version 1.0
+ * @since API Level 21
+ */
 public class Camera extends AppCompatActivity {
+
+    /** ImageView component for displaying captured or selected images */
     ImageView imageView;
-    Button btn_takepic, nextbtn, gallery;
+
+    /** Button for triggering camera capture functionality */
+    Button btn_takepic;
+
+    /** Button for navigating to the next screen in the workflow */
+    Button nextbtn;
+
+    /** Button for accessing device gallery to select existing images */
+    Button gallery;
+
+    /** Request code for camera permission requests */
     private static final int REQUEST_CAMERA_PERMISSION = 101;
+
+    /** Request code for external storage read permission requests */
     private static final int REQUEST_READ_EXTERNAL_STORAGE_PERMISSION = 102;
+
+    /** Request code for image picker intent results */
     private static final int REQUEST_PICK_IMAGE = 301;
 
-
-    ActivityResultLauncher<Intent> activityResultLauncher= registerForActivityResult
+    /**
+     * Activity result launcher for handling camera capture results.
+     *
+     * <p>This launcher processes the result from camera capture intents,
+     * extracts the bitmap from the result bundle, displays it in the ImageView,
+     * and initiates the upload process to Firebase.</p>
+     */
+    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult
             (new ActivityResultContracts.StartActivityForResult(), result -> {
                         if (result.getResultCode() == RESULT_OK && result.getData() != null) {
                             Bundle bundle = result.getData().getExtras();
                             Bitmap bitmap = (Bitmap) bundle.get("data");
                             imageView.setImageBitmap(bitmap);
-                            addImage(bitmap, anamnesis.getDetails().getId()+anamnesis.getKeyID());
+                            addImage(bitmap, anamnesis.getDetails().getId() + anamnesis.getKeyID());
                         }
                     }
             );
 
-
+    /**
+     * Initializes the activity and sets up the user interface.
+     *
+     * <p>This method:</p>
+     * <ul>
+     *   <li>Enables edge-to-edge display</li>
+     *   <li>Sets the activity layout</li>
+     *   <li>Configures window insets for proper display</li>
+     *   <li>Initializes UI components</li>
+     *   <li>Sets up click listeners for camera functionality</li>
+     * </ul>
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                          previously being shut down, this Bundle contains the data
+     *                          it most recently supplied in onSaveInstanceState(Bundle)
+     */
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +124,10 @@ public class Camera extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        imageView=findViewById(R.id.imageView);
-        btn_takepic=findViewById(R.id.btn_takepic);
-        nextbtn=findViewById(R.id.nextbtn);
-        gallery=findViewById(R.id.gallery);
+        imageView = findViewById(R.id.imageView);
+        btn_takepic = findViewById(R.id.btn_takepic);
+        nextbtn = findViewById(R.id.nextbtn);
+        gallery = findViewById(R.id.gallery);
 
         btn_takepic.setOnClickListener(v -> {
             Intent takePicIntent = new Intent();
@@ -81,7 +136,12 @@ public class Camera extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Called when the activity will start interacting with the user.
+     *
+     * <p>This method checks for camera permissions and requests them if not already granted.
+     * This ensures the app has necessary permissions before attempting to use camera functionality.</p>
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -91,13 +151,16 @@ public class Camera extends AppCompatActivity {
     }
 
     /**
-     * onRequestPermissionsResult method
-     * <p> Method triggered by other activities returning result of permissions request
-     * </p>
+     * Handles the result of permission requests.
      *
-     * @param requestCode the request code triggered the activity
-     * @param permissions the array of permissions granted
-     * @param grantResults the array of permissions granted
+     * <p>This method processes the user's response to permission requests for camera
+     * and external storage access. It displays appropriate toast messages when
+     * permissions are denied to inform the user of the consequences.</p>
+     *
+     * @param requestCode  The request code passed to requestPermissions()
+     * @param permissions  The requested permissions (never null)
+     * @param grantResults The grant results for the corresponding permissions
+     *                    which are either PERMISSION_GRANTED or PERMISSION_DENIED (never null)
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -114,11 +177,37 @@ public class Camera extends AppCompatActivity {
         }
     }
 
+    /**
+     * Initiates the gallery selection process for choosing existing images.
+     *
+     * <p>This method creates an intent to open the device's image gallery,
+     * allowing users to select existing photos instead of capturing new ones.
+     * The selected image will be processed in the onActivityResult method.</p>
+     *
+     * @param view The view that triggered this method (typically the gallery button)
+     */
     public void gallery(View view) {
         Intent si = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(si, REQUEST_PICK_IMAGE);
     }
+
+    /**
+     * Handles results from activities started for result.
+     *
+     * <p>This method specifically processes results from the gallery image picker.
+     * When an image is successfully selected, it:</p>
+     * <ul>
+     *   <li>Converts the selected image URI to a Bitmap</li>
+     *   <li>Displays the image in the ImageView</li>
+     *   <li>Initiates the upload process to Firebase</li>
+     *   <li>Handles any errors during image processing</li>
+     * </ul>
+     *
+     * @param requestCode The integer request code originally supplied to startActivityForResult()
+     * @param resultCode  The integer result code returned by the child activity
+     * @param data        An Intent that carries the result data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -135,17 +224,36 @@ public class Camera extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Processes and uploads an image to Firebase Firestore.
+     *
+     * <p>This method handles the complete image upload workflow:</p>
+     * <ul>
+     *   <li>Converts the bitmap to a byte array with JPEG compression</li>
+     *   <li>Checks image size and compresses further if necessary (max 1MB)</li>
+     *   <li>Creates a Firebase Blob from the image data</li>
+     *   <li>Uploads the image with metadata to Firestore</li>
+     *   <li>Provides user feedback through progress dialogs and logging</li>
+     * </ul>
+     *
+     * <p>The method implements automatic image compression to ensure uploaded
+     * images don't exceed the 1MB size limit, gradually reducing quality
+     * until the size requirement is met.</p>
+     *
+     * @param image The Bitmap image to be uploaded
+     * @param name  The unique identifier/name for the image in Firebase
+     */
     public void addImage(Bitmap image, String name) {
         ProgressDialog pd;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        Toast.makeText(this, ""+imageBytes.length, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + imageBytes.length, Toast.LENGTH_SHORT).show();
+
         if (imageBytes.length > 1040000) {
             pd = ProgressDialog.show(this, "Compress", "Image size is too large\nCompressing...", true);
             int qual = 100;
-            // Degradation
+            // Gradual quality degradation until size requirement is met
             while (imageBytes.length > 1040000) {
                 qual -= 5;
                 baos = new ByteArrayOutputStream();
@@ -160,7 +268,7 @@ public class Camera extends AppCompatActivity {
         imageMap.put("imageName", name);
         imageMap.put("imageData", blob);
 
-        pd=ProgressDialog.show(this,"Upload image","Uploading...",true);
+        pd = ProgressDialog.show(this, "Upload image", "Uploading...", true);
         refImageStamp.document(name).set(imageMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -176,8 +284,17 @@ public class Camera extends AppCompatActivity {
                 });
         pd.dismiss();
     }
-    public void next11(View view){
-        Intent intent=new Intent(this, Report.class);
+
+    /**
+     * Navigates to the Report activity.
+     *
+     * <p>This method handles the transition to the next step in the medical
+     * documentation workflow, moving from image capture to report generation.</p>
+     *
+     * @param view The view that triggered this navigation (typically the next button)
+     */
+    public void next11(View view) {
+        Intent intent = new Intent(this, Report.class);
         startActivity(intent);
     }
 }
